@@ -72,7 +72,7 @@ def turbine_calculation():
             Hathd = 10.34 - 0.18 - 0.0012*RunnerCL
 
             sigma_plant = (Hathd - hs - (D2 / 2))/(Hn)
-            sigma_turbine = 0.028
+            sigma_turbine = float(input("sigma_turbine: ..."))
 
             safety = (sigma_plant / sigma_turbine)
             print("Safety factor: {} ".format((float(safety))))
@@ -130,7 +130,7 @@ def turbine_calculation():
                 elif 0.6 < coef < 0.8:
                     return ((coef - 0.6) / 0.2) * (4.5 - 6) + 6
                 elif coef > 0.8:
-                    return coef * 10
+                    return coef * 4.5
 
             def calculate_Max_Pressure(Hn, dhzul):
                 return Hn * (1 + dhzul)
@@ -178,8 +178,11 @@ def turbine_calculation():
             if __name__ == "__main__":
                 main()
 
+            to_restart = input("Would you like to start the calculation again? (yes/no): ").lower()
 
-            break
+            if to_restart != 'yes':
+                print("Calculation terminated.")
+                break  # Break the loop and terminate the program
             
         except ValueError:
             print("Incorrect entry! Please enter a numerical value!")
